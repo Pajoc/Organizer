@@ -3,6 +3,7 @@ using FriendOrganizer.UI.Data;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace FriendOrganizer.UI.ViewModel
 {
@@ -17,9 +18,10 @@ namespace FriendOrganizer.UI.ViewModel
             _friendDataService = friendDataService;
         }
 
-        public void Load()
+        //O Task faz com que quem chama tenha de esperar
+        public async Task LoadAsync()
         {
-            var friends = _friendDataService.GetAll();
+            var friends = await _friendDataService.GetAllAsync();
             Friends.Clear();
             foreach (var friend in friends)
             {
