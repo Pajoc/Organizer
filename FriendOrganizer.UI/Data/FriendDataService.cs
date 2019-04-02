@@ -39,12 +39,12 @@ namespace FriendOrganizer.UI.Data
 
         }
 
-        public async Task<List<Friend>> GetAllAsync()
+        public async Task<Friend> GetByIdAsync(int friendId)
         {
             using (var ctx = _contextCreator())
             {
                 //Senão o ctx pode ser disposed anetes da função retornar
-                return await ctx.Friends.AsNoTracking().ToListAsync();
+                return await ctx.Friends.AsNoTracking().SingleAsync(f => f.Id == friendId);
             }
         }
     }
